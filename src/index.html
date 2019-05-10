@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <img src="./images/img1.jpg">
+    <script src="./index.js"></script> -->
+    <header >
+        <h1 class="header__label">News</h1>
+    </header>
+    <main>
+        <div class="main__sources" id="main-sources" >
+            <!-- sources -->
+        </div>
+        <div class="main__search">
+            <input class="main__search__input" id="main-search-input" placeholder="Search filter" type="search">
+            <button class="main__search__bn" id="main-search-bn">Search</button>          
+        </div>
+        <div class="main__newsContent" id ="main-newsContent">.
+            
+            <!-- news_content -->
+        </div>
+            <img id="main-img"src="./images/banner.png">
+            
+        <div style="text-align: center;">
+            <h4 class="main__errorLabel" id="main-errorLabel" style="display: none">No matches :(</h4>
+        </div>
+            <button class="main__load-bn" id="main-load-bn" style="display: none">Load more</button> 
+        
+    </main>
+    <footer>
+        <p>&copy; Dubovskaya, 751001. Powered by <a  href="https://newsapi.org/">NewsAPI</a> </p>
+    </footer>
+
+    <template class="template__news-item" id="template-news-item">
+        <div class="news-item">
+            <div class="news-item__content__img">
+                        
+            </div>    
+            <div class="news-item__content">
+
+                <h3 class="news-item__content__title"></h3>
+                <h4 class="news-item__content__source"></h4>
+                <p class="news-item__content__text"></p>
+                <a class="news-item__content__link">Read more</a>
+            </div>
+        </div>
+    </template>
+</body>
+</html>
