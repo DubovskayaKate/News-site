@@ -24,9 +24,8 @@ document.querySelector('#main-search-bn').addEventListener('click',
             controller_loadNewsByUrl(`everything?q=${document.querySelector('#main-search-input').value}&pageSize=5&page=1&`);
     }
 });
-
 document.querySelector('#main-search-input').addEventListener('keyup', 
-    function(event) {
+    function(event) { // () => VS function
         event.preventDefault();
         if (event.keyCode === 13) {
             document.querySelector('#main-search-bn').click();
@@ -44,10 +43,23 @@ function view_showElement(element){
 
 
 function view_createSourceItem(id, name){
-    document.querySelector('#main-sources').innerHTML += '<div class"btn__sources"><button id="' +id + '">' + name + '</button></div> ';
+    document.querySelector('#main-sources').innerHTML += '<div class"btn__sources"><button id="' +id + '">' + name + '</button></div> '; // ES6 `${}`
 }
 
+function view_createNewsItem(html, data){
+    html.querySelector('.news-item__content__img').style.backgroundImage = `url(${data.urlToImage ? data.urlToImage : './src/images/img1.jpg'})`;
+    html.querySelector('.news-item__content__title').textContent = data.title;
+    html.querySelector('.news-item__content__source').textContent = data.source.name;
+    html.querySelector('.news-item__content__text').textContent = data.description;
+    html.querySelector('.news-item__content__link').setAttribute('href', data.url);
+    return html;
+}
 
+// let controller = {
+//     loadSorces: function() {
+
+//     }
+// }
 function controller_loadSources(){
     const url = 'https://newsapi.org/v2/sources?apiKey=f8e8d035014546dd9789f8527d1fe4d3&category=technology&country=us';
     const request = new Request(url);
@@ -80,7 +92,7 @@ function controller_loadNewsByUrl(urlPart){
                 view_hideElement(loadButton);
                 return;
             }      
-            let block = model_createBlock(newsCount, data.articles);
+            let block = model_createNewsBlock(newsCount, data.articles);
             newsBlock.appendChild(block);
             if(newsCount < 5)
                 view_hideElement(loadButton);
@@ -107,7 +119,7 @@ function controller_appendNews(){
                     return;
                 }     
 
-                let block = model_createBlock(newsCount, data.articles);                
+                let block = model_createNewsBlock(newsCount, data.articles);                
                 document.querySelector('#main-newsContent').appendChild(block);
 
                 alreadyNewsDisplayed += newsCount;
@@ -119,16 +131,8 @@ function controller_appendNews(){
         });
 }
 
-function view_createNewsItem(html, data){
-    html.querySelector('.news-item__content__img').style.backgroundImage = `url(${data.urlToImage ? data.urlToImage : './src/images/img1.jpg'})`;
-    html.querySelector('.news-item__content__title').textContent = data.title;
-    html.querySelector('.news-item__content__source').textContent = data.source.name;
-    html.querySelector('.news-item__content__text').textContent = data.description;
-    html.querySelector('.news-item__content__link').setAttribute('href', data.url);
-    return html;
-}
 
-function model_createBlock(newsCount, data){
+function model_createNewsBlock(newsCount, data){
     const place = document.createDocumentFragment();
     const news_item = document.querySelector('#template-news-item');
 
